@@ -1,0 +1,34 @@
+mainmenu "ICM42688 Sensor Data Retrieval"
+
+choice APP_SENSOR_MODE
+	prompt "Sensor Data Retrieval Mode"
+    default APP_SENSOR_MODE_POLLING
+	help
+		This configures the data retrieval mode for this codebase.
+
+config APP_SENSOR_MODE_INTERRUPT
+ 	bool "Interrupt driven using data-ready trigger"
+    select ICM42688_TRIGGER
+
+config APP_SENSOR_MODE_POLLING
+	bool "Use threaded retrieval with polling"
+
+endchoice
+
+config APP_POLLING_INTERVAL_MS
+    int "Polling interval in milliseconds"
+    depends on APP_SENSOR_MODE_POLLING
+    default 100
+    range 10 5000
+    help
+      Specify the polling interval in milliseconds for sensor data reading.
+      
+      Recommended values:
+      - 10ms (100Hz): High frequency applications
+      - 50ms (20Hz): Motion tracking
+      - 100ms (10Hz): General purpose (default)
+      - 1000ms (1Hz): Low power applications
+      
+      Valid range: 10-5000 ms
+
+source "Kconfig.zephyr"
