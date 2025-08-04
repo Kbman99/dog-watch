@@ -1,5 +1,7 @@
-Get temperature, acceleration, and angular velocity from an ICM42605 sensor 
-(polling & trigger mode).
+Dog Watch
+
+Eventually a watch for dogs, but for now get temperature, acceleration, and angular 
+velocity from an ICM42688 sensor (polling & trigger mode).
 
 Description
 ***********
